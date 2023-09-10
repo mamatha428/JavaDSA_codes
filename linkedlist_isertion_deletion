@@ -1,0 +1,85 @@
+
+import java.io.*;
+class Linkedlist{
+    Node head;
+    static class Node{
+        int data;
+        Node next;
+        Node(int d){
+            data=d;
+            next=null;
+        }
+    }
+    public static Linkedlist insertion(Linkedlist list,int val){
+        Node newnode=new Node(val);
+        Node temp;
+        if(list.head==null)
+        list.head=newnode;
+        else{
+           temp=list.head;
+           while(temp.next!=null){
+               temp=temp.next;
+           }
+           temp.next=newnode;
+        }
+        return list;
+    }
+    public static void printlist(Linkedlist list){
+        if(list.head==null)
+        System.out.println("List is empty");
+        else{
+            Node temp=list.head;
+            while(temp!=null){
+                System.out.print(temp.data+" ");
+                temp=temp.next;
+            }
+        }
+        }
+    public static Linkedlist deletion(Linkedlist list,int val){
+       Node current=list.head,prev=null;
+       //if val is 1st element 
+       if(current!=null && current.data==val){
+       list.head=current.next;
+       return list;
+       }
+       //if val is in middle of linked list
+       while(current!=null && current.data!=val){
+           prev=current;
+           current=current.next;
+       }
+       //means val found in middle
+       //current is at the val position
+       if(current!=null){
+           prev.next=current.next;
+       }
+       //val not found
+       if(current==null)
+       System.out.println("val not found in linked list");
+       return list;
+    }
+    public static void main(String args[]){
+        Linkedlist list=new Linkedlist();
+        list=insertion(list,1);
+        list=insertion(list,1);
+        list=insertion(list,2);
+        list=insertion(list,4);
+        list=insertion(list,6);
+        list=insertion(list,5);
+        printlist(list);
+        System.out.println();
+        list=deletion(list,1);
+        printlist(list);
+        System.out.println();
+        list=deletion(list,4);
+        printlist(list);
+        System.out.println();
+        list=deletion(list,9);
+        printlist(list);
+        
+    }
+    }/*output
+1 1 2 4 6 5 
+1 2 4 6 5 
+1 2 6 5 
+val not found in linked list
+1 2 6 5 */
