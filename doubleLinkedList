@@ -1,0 +1,103 @@
+/* Online Java Compiler and Editor */
+/*public class HelloWorld{
+
+     public static void main(String []args){
+        System.out.println("Hello, World!");
+     }
+}*/
+import java.util.*;
+class Node {
+    int data;
+    Node next;
+    Node prev;
+    Node(int d) {
+        this.data=d;
+        this.next=null;
+        this.prev=null;
+    }
+}
+public class Demo {
+    static Node head=null;
+    static Node tail=null;
+    static void insertatBeginning(int val) {
+        Node newnode=new Node(val);
+        if(head==null) {
+            //head.data=val;
+            // tail=head;
+            head=newnode;
+            tail=newnode;
+        } else {
+            newnode.next=head;
+            head.prev=newnode;
+            head=newnode;
+        }
+    }
+    static void insertatEnd(int val) {
+        Node newnode=new Node(val);
+        if(head==null) {
+            head=newnode;
+            tail=newnode;
+        } else {
+            //Node temp=head; no need as we have tail
+            tail.next=newnode;
+            newnode.prev=tail;
+            tail=newnode;
+
+        }
+
+    }
+    static void insertatPosition(int val,int pos){
+        Node newnode=new Node(val);
+        if(pos==1)
+        insertatBeginning(val);
+        else{
+            Node currentNode=head;
+            int currentPosition=1;
+            while(currentNode!=null && currentPosition<pos){
+                currentNode=currentNode.next;
+                currentPosition++;
+            }
+            if(currentNode==null){
+                insertatEnd(val);
+            }
+            else{
+                newnode.next=currentNode;
+                currentNode.prev=newnode;
+                currentNode.prev.next=newnode;
+                newnode.prev=currentNode.prev;
+            }
+        }
+    }
+    static void display(Node head) {
+        Node temp=head;
+        if(head==null)
+            System.out.println("list is empty");
+        else {
+            while(temp!=null) {
+                System.out.print(temp.data+" ");
+                temp=temp.next;
+            }
+        }
+    }
+    public static void main(String args[]) {
+        // insertatBeginning(3);
+        //  insertatBeginning(4);
+        //  insertatBeginning(5);
+        //  insertatBeginning(8);
+        //   insertatBeginning(9);
+        //   display(head); output:9 8 5 4 3
+        
+      //  insertatEnd(6);
+      //  insertatEnd(5);
+      //  insertatEnd(3);
+     //   insertatEnd(2);
+      //  insertatEnd(1);
+      //  display(head); output:6 5 3 2 1
+      insertatPosition(77,1);
+      display(head);
+      insertatPosition(88,3);
+      display(head);
+      insertatPosition(99,8);
+      display(head);//see once again output not coming at position correctly
+    }
+}
