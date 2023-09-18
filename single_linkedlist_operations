@@ -9,28 +9,7 @@ class Listnode{
         this.data=val;
         this.next=next;
     }
-  /*  Listnode insert(Listnode list,int val){
-        Listnode newnode=new Listnode(val);
-        if(list==null)
-        list=newnode;
-        else{
-            Listnode temp=list;
-            while(temp.next!=null){
-                temp=temp.next;
-            }
-            temp.next=newnode;
-        }
-        return list;
-    }
-    void display(Listnode list){
-        Listnode temp=new Listnode();
-        temp=list;
-        while(temp!=null){
-            System.out.print(temp.data+" ");
-            temp=temp.next;
-        }
-    }
-    */
+
 }
 public class Solution{
 
@@ -58,6 +37,37 @@ public class Solution{
         return list;
         
     }
+    static Listnode insertAtPosition(Listnode list,int position,int val){
+        int count=1;
+        Listnode temp,prev;
+        if(position==1){
+        list=insertAtHead(list,val);
+        return list;
+        }
+        else{
+             temp=prev=list;
+            while(temp!=null && count<position){
+                prev=temp;
+                temp=temp.next;
+                count++;
+            }
+            if(count==position){
+            Listnode newnode=new Listnode(val);
+            prev.next=newnode;
+           newnode.next=temp;
+            
+        }
+        else{
+            System.out.println("Position not found");
+            return list;
+        }
+        if(temp==null){
+            System.out.println("Position not found");
+        }
+       // return list;
+    }
+    return list;
+    }
     static Listnode deleteAtTail(Listnode list){
         Listnode temp,prev;
         temp=prev=list;
@@ -76,6 +86,34 @@ public class Solution{
         System.out.println("List is empty,deletion is not possible");
         else{
             list=list.next;
+        }
+        return list;
+    }
+    static Listnode deleteAtPosition(Listnode list,int position){
+        int count=1;
+        Listnode temp,prev;
+        temp=prev=list;//intialization if not showing error
+        if(list==null){
+            
+            System.out.println("list is empty");
+        }
+        else if(position==1){
+            list=deleteAtHead(list);
+            return list;
+        }
+        else{
+            temp=prev=list;
+            while(temp!=null && count<position){
+                prev=temp;
+                temp=temp.next;
+                count++;
+            }
+            if(temp!=null)
+            prev.next=temp.next;
+        if(temp==null || count>position){
+            System.out.println("Position not found");
+            return list;
+        }
         }
         return list;
     }
@@ -104,5 +142,20 @@ public class Solution{
         //deleting at head of the list
         list1=deleteAtHead(list1);
         display(list1);
+        //inserting at position
+        list1=insertAtPosition(list1,5,88);//tried for position:1,2,3,4 gave answers,at 5 position not found came
+        display(list1);
+        //deleteing at position
+        list1=deleteAtPosition(list1,4);//tried for 1,2,3 positions run correctly
+        display(list1);
     }
 }
+output:
+2 4 6 8 
+99 2 4 6 8 
+99 2 4 6 
+2 4 6 
+Position not found
+2 4 6 
+Position not found
+2 4 6 
