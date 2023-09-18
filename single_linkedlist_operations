@@ -1,0 +1,108 @@
+class Listnode{
+    int data;
+    Listnode next;
+    Listnode(){}
+    Listnode(int val){
+        this.data=val;
+    }
+    Listnode(int val,Listnode next){
+        this.data=val;
+        this.next=next;
+    }
+  /*  Listnode insert(Listnode list,int val){
+        Listnode newnode=new Listnode(val);
+        if(list==null)
+        list=newnode;
+        else{
+            Listnode temp=list;
+            while(temp.next!=null){
+                temp=temp.next;
+            }
+            temp.next=newnode;
+        }
+        return list;
+    }
+    void display(Listnode list){
+        Listnode temp=new Listnode();
+        temp=list;
+        while(temp!=null){
+            System.out.print(temp.data+" ");
+            temp=temp.next;
+        }
+    }
+    */
+}
+public class Solution{
+
+   static Listnode insertAtTail(Listnode list,int val){
+        Listnode newnode=new Listnode(val);
+        if(list==null)
+        list=newnode;
+        else{
+            Listnode temp=list;
+            while(temp.next!=null){
+                temp=temp.next;
+            }
+            temp.next=newnode;
+        }
+        return list;
+    }
+    static Listnode insertAtHead(Listnode list,int val){
+        Listnode newnode=new Listnode(val);
+        if(list==null)
+        list=newnode;
+        else{
+            newnode.next=list;
+            list=newnode;
+        }
+        return list;
+        
+    }
+    static Listnode deleteAtTail(Listnode list){
+        Listnode temp,prev;
+        temp=prev=list;
+        if(temp==null)
+        System.out.println("List is empty");
+        while(temp.next!=null){
+            prev=temp;
+            temp=temp.next;
+        }
+        prev.next=null;
+        return list;
+    }
+    static Listnode deleteAtHead(Listnode list){
+        Listnode temp=list;
+        if(list==null)
+        System.out.println("List is empty,deletion is not possible");
+        else{
+            list=list.next;
+        }
+        return list;
+    }
+    
+    static void display(Listnode list){
+        Listnode temp;
+        temp=list;
+        while(temp!=null){
+            System.out.print(temp.data+" ");
+            temp=temp.next;
+        }
+        System.out.println();
+    }
+    public static void main(String args[]){
+        Listnode list1=null;//=new Listnode();
+        list1=insertAtTail(list1,2);
+        list1=insertAtTail(list1,4);
+        list1=insertAtTail(list1,6);
+        list1=insertAtTail(list1,8);
+        display(list1);
+        //inserting at head of the list
+        list1=insertAtHead(list1,99);
+        display(list1);
+        list1=deleteAtTail(list1);
+        display(list1);
+        //deleting at head of the list
+        list1=deleteAtHead(list1);
+        display(list1);
+    }
+}
